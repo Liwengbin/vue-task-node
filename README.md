@@ -1,6 +1,6 @@
-# itask
+# vue-task-node
 
-> TaskNode Plugin!
+> TaskNode Plugin! vue-task-node is a Vue based task node mapping plug-in.
 
 ## Build Setup
 
