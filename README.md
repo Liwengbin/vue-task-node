@@ -47,6 +47,7 @@ Vue.use(VueTaskNode)
     <!--需要绘制的节点-->
 </task-work-area>
 ```
+
 参数 | 说明	| 类型 | 是否必填
 ---|---|---|---
 id | 工作区ID | String/Number | 必填
@@ -80,6 +81,7 @@ node:{
   ]
 }
 ```
+
 参数 | 说明	| 类型 | 是否必填
 ---|---|---|---
 selectNode | 选中节点回调函数 | function(event,node) | 否
@@ -128,12 +130,13 @@ connection: [
   }
 ]
 ```
-`<task-curve-path>`
+
 参数 | 说明	| 类型 | 是否必填
 ---|---|---|---
 areaID | 工作区ID | <task-work-area>的ID | 必填
 connection | 关系数据 | Array | 必填
-`<task-path>`
+
+
 参数 | 说明	| 类型 | 是否必填
 ---|---|---|---
 start | 起点坐标 | Number | 必填
@@ -149,11 +152,12 @@ end | 终点坐标 | Number | 必填
 ```js
 mouse:{id:'xg',title:'修改'}
 ```
-`<task-mouse-menu>`
+
 参数 | 说明	| 类型 | 是否必填
 ---|---|---|---
 id | 右键菜单ID | String/Number | 必填
-`<task-mouse-item>`
+
+
 参数 | 说明	| 类型 | 是否必填
 ---|---|---|---
 icon | 被选项图标 | css 类 | 否
