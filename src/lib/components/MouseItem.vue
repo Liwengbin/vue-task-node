@@ -2,23 +2,21 @@
   <li class="ui-context-menu-item" @click="selectClick($event,mouse)">
     <i :class="icon">
     </i>
-    <span class="item-name">
-				{{mouse.title}}
-			  </span>
+    <span class="item-name">{{mouse.title}}</span>
   </li>
 </template>
 <script>
-  export default {
-    name: 'TaskMouseItem',
-    props:["icon","mouse","selectClick"],
-    data () {
-      return {
-      }
-    },
-    methods: {
-
+export default {
+  name: 'TaskMouseItem',
+  props: ['icon', 'mouse', 'selectClick'],
+  data () {
+    return {
     }
+  },
+  methods: {
+
   }
+}
 </script>
 
 <style>

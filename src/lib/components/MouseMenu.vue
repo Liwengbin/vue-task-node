@@ -6,14 +6,14 @@
   </div>
 </template>
 <script>
-  export default {
-    name: 'TaskMouseMenu',
-    props:["id"],
-    data () {
-      return {
-      }
+export default {
+  name: 'TaskMouseMenu',
+  props: ['id'],
+  data () {
+    return {
     }
   }
+}
 </script>
 
 <style>

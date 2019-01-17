@@ -7,11 +7,10 @@
         <!--<task-path :start="{x:150,y:300}" :end="{x:300,y:400}"></task-path>-->
 
         <template v-for="node in nodes">
-          <task-start-end-node :selectNode="selectNode" mousemenu="menu_id" :node="node"></task-start-end-node>
+          <task-start-end-node :key="node.id" :selectNode="selectNode" mousemenu="menu_id" :node="node"></task-start-end-node>
         </template>
-
-
-        <task-start-end-node mousemenu="menu_id" :node="{id:'node6',icon:'icon-task-get',title:'数据分组',state:'mistake',positionX:400,positionY:500}">
+        <task-start-end-node mousemenu="menu_id"
+                             :node="{id:'node6',icon:'icon-task-get',title:'数据分组',state:'mistake',positionX:400,positionY:500}">
           <task-in-port-list :inports="[{id:'data_in1',isConnected:true}]">
             <task-in-port pid="data_in5"></task-in-port>
           </task-in-port-list>
@@ -39,65 +38,101 @@
 
 <script>
 
-  export default {
-    name: 'App',
-    data() {
-      return {
-        nodes: [{
-          id: 'node1', icon: 'icon-task-chucun', title: '数据', state: 'success', positionX: 400, positionY: 100,
-          inports: [],
-          outports: [{id: 'node1_out1',content: 'xml'}]
-        },{
-          id: 'node2', icon: 'icon-task-liujisuan', title: '数据格式化', state: 'success', positionX: 400, positionY: 200,
-          inports: [{id: 'node2_in1', isConnected: true}],
-          outports: [{id: 'node2_out1', content: '表格'}, {id: 'node2_out2', content: 'Json'}, {
-            id: 'node2_out3',
-            content: 'xml'
-          }]
-        },{
-          id: 'node3', icon: 'icon-task-tubiao-zhexiantu', title: '折线图', state: 'ready', positionX: 200, positionY: 500,
-          inports: [{id: 'node3_in1', isConnected: true}, {id: 'node3_in2', isConnected: false}],
-          outports: []
-        },{
-          id: 'node4', icon: 'icon-task-shenjing1', title: '天气预测', state: 'running', positionX: 400, positionY: 300,
-          inports: [{id: 'node4_in1', isConnected: true}],
-          outports: [{id: 'node4_out1', content: '表格'}, {id: 'node4_out2', content: 'Json'}, {
-            id: 'node4_out3',
-            content: 'xml'
-          }]
-        },{
-          id: 'node5', icon: 'icon-task-ranqijiance', title: '雷达图', state: 'success', positionX: 600, positionY: 500,
-          inports: [{id: 'node5_in1', isConnected: true}],
-          outports: []
-        },{
-          id: 'node6', icon: 'icon-task-tubiao-zhuzhuangtu', title: '条形图', state: 'ready', positionX: 400, positionY: 600,
-          inports: [{id: 'node6_in1', isConnected: true}],
-          outports: []
-        }],
-        connection: [{start: 'node1_out1', end: 'node2_in1'},{start: 'node2_out2', end: 'node4_in1'},{start: 'node4_out1', end: 'node3_in1'},{start: 'node4_out2', end: 'node5_in1'},{start: 'node4_out2', end: 'data_in1'},{start: 'data_out1', end: 'node6_in1'}]
-      }
+export default {
+  name: 'App',
+  data () {
+    return {
+      nodes: [{
+        id: 'node1',
+        icon: 'icon-task-chucun',
+        title: '数据',
+        state: 'success',
+        positionX: 400,
+        positionY: 100,
+        inports: [],
+        outports: [{id: 'node1_out1', content: 'xml'}]
+      }, {
+        id: 'node2',
+        icon: 'icon-task-liujisuan',
+        title: '数据格式化',
+        state: 'success',
+        positionX: 400,
+        positionY: 200,
+        inports: [{id: 'node2_in1', isConnected: true}],
+        outports: [{id: 'node2_out1', content: '表格'}, {id: 'node2_out2', content: 'Json'}, {
+          id: 'node2_out3',
+          content: 'xml'
+        }]
+      }, {
+        id: 'node3',
+        icon: 'icon-task-tubiao-zhexiantu',
+        title: '折线图',
+        state: 'ready',
+        positionX: 200,
+        positionY: 500,
+        inports: [{id: 'node3_in1', isConnected: true}, {id: 'node3_in2', isConnected: false}],
+        outports: []
+      }, {
+        id: 'node4',
+        icon: 'icon-task-shenjing1',
+        title: '天气预测',
+        state: 'running',
+        positionX: 400,
+        positionY: 300,
+        inports: [{id: 'node4_in1', isConnected: true}],
+        outports: [{id: 'node4_out1', content: '表格'}, {id: 'node4_out2', content: 'Json'}, {
+          id: 'node4_out3',
+          content: 'xml'
+        }]
+      }, {
+        id: 'node5',
+        icon: 'icon-task-ranqijiance',
+        title: '雷达图',
+        state: 'success',
+        positionX: 600,
+        positionY: 500,
+        inports: [{id: 'node5_in1', isConnected: true}],
+        outports: []
+      }, {
+        id: 'node6',
+        icon: 'icon-task-tubiao-zhuzhuangtu',
+        title: '条形图',
+        state: 'ready',
+        positionX: 400,
+        positionY: 600,
+        inports: [{id: 'node6_in1', isConnected: true}],
+        outports: []
+      }],
+      connection: [{start: 'node1_out1', end: 'node2_in1'}, {
+        start: 'node2_out2',
+        end: 'node4_in1'
+      }, {start: 'node4_out1', end: 'node3_in1'}, {start: 'node4_out2', end: 'node5_in1'}, {
+        start: 'node4_out2',
+        end: 'data_in1'
+      }, {start: 'data_out1', end: 'node6_in1'}]
+    }
+  },
+  methods: {
+    updateNode: function (event, select) {
+      console.log(event, select)
     },
-    methods: {
-      updateNode: function (event, select) {
-        console.log(event, select);
-      },
-      findNode: function (event, select) {
-        console.log(event, select);
-      },
-      removeNode: function (event, select) {
-        console.log(event, select);
-      },
-      copyNode: function (event, select) {
-        console.log(event, select);
-      },
-      bugNode: function (event, select) {
-        console.log(event, select);
-      },
-      selectNode(event, node) {
-        console.log(event, node);
-      }
+    findNode: function (event, select) {
+      console.log(event, select)
+    },
+    removeNode: function (event, select) {
+      console.log(event, select)
+    },
+    copyNode: function (event, select) {
+      console.log(event, select)
+    },
+    bugNode: function (event, select) {
+      console.log(event, select)
+    },
+    selectNode (event, node) {
+      console.log(event, node)
     }
   }
+}
 </script>
 
 <style>

@@ -5,14 +5,14 @@
 </template>
 <script>
 
-  export default {
-    name: 'TaskOutPort',
-    props:["port","pid"],
-    data () {
-      return {
-      }
+export default {
+  name: 'TaskOutPort',
+  props: ['port', 'pid'],
+  data () {
+    return {
     }
   }
+}
 </script>
 
 <style>

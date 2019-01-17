@@ -5,7 +5,7 @@ import App from './App'
 import './assets/icon/iconfont.css'
 import TaskNode from './lib/index'
 Vue.config.productionTip = false
-Vue.use(TaskNode);
+Vue.use(TaskNode)
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
