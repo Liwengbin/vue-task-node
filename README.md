@@ -4,10 +4,10 @@
 > TaskNode Plugin! vue-task-node is a Vue based task node mapping plug-in.
 
 >❤MyHome:🏡<br>
-github:https://github.com/Liwengbin<br>
-思否:https://segmentfault.com/u/vidanao<br>
+github：https://github.com/Liwengbin<br>
+思否：https://segmentfault.com/u/vidanao<br>
 掘金：https://juejin.im/user/5bd967706fb9a0227e0a80b5<br>
-npm:https://www.npmjs.com/~liwenbing<br>
+npm：https://www.npmjs.com/~liwenbing<br>
 
 ## Build Setup
 
