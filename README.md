@@ -3,6 +3,12 @@
 
 > TaskNode Plugin! vue-task-node is a Vue based task node mapping plug-in.
 
+>❤MyHome:🏡<br>
+github:https://github.com/Liwengbin<br>
+思否:https://segmentfault.com/u/vidanao<br>
+掘金：https://juejin.im/user/5bd967706fb9a0227e0a80b5<br>
+npm:https://www.npmjs.com/~liwenbing<br>
+
 ## Build Setup
 
 ``` bash
@@ -322,6 +328,7 @@ mouse | 数据 | Json | 必填
 1.0.0 | 开端,根据数据绘制任务节点 | 2019年1月16日 | 否
 1.0.1 | 修改代码规范Eslin | 2019年1月17日 | 否
 1.0.2 | 调试入口文件 | 2019年1月17日 | 否
+1.0.3 | npm下载包错误修改 | 2019年1月17日 | 否
 1.0.x | 优化配置文件 | 2019年1月x日 | 否
 
 ## 六、未来新版本
