@@ -310,6 +310,9 @@ mouse | 数据 | Json | 必填
 }
 -->
 ```
+![demo1](https://github.com/Liwengbin/vue-task-node/blob/master/src/assets/demo1.png)
+![demo](https://github.com/Liwengbin/vue-task-node/blob/master/src/assets/demo.png)
+
 
 ## 五、版本
 
@@ -325,8 +328,4 @@ mouse | 数据 | Json | 必填
 
 ①工作区内节点拖拽<br>
 ②优化传参和公共属性
-
-![demo1](https://github.com/Liwengbin/vue-task-node/blob/master/src/assets/demo1.png)
-![demo](https://github.com/Liwengbin/vue-task-node/blob/master/src/assets/demo.png)
-
 
