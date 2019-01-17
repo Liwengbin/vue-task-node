@@ -57,10 +57,7 @@ export default {
       outports: Array
     },
     mousemenu: String,
-    selectNode: {
-      type: Function,
-      default: this.selectNodes
-    }
+    selectNode: Function
   },
   data () {
     return {
