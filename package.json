@@ -4,7 +4,7 @@
   "description": "TaskNode Plugin! vue-task-node is a Vue based task node mapping plug-in",
   "author": "wenbing.li",
   "license": "MIT",
-  "main": "src/li/index.js",
+  "main": "src/lib/index.js",
   "private": false,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
