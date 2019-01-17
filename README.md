@@ -309,7 +309,24 @@ mouse | 数据 | Json | 必填
   -moz-osx-font-smoothing: grayscale;
 }
 -->
-
 ```
+
+## 五、版本
+
+版本 | 说明	| 更新时间 |是否支持拖拽
+---|---|---|---
+1.0.0 | 开端,根据数据绘制任务节点 | 2019年1月16日 | 否
+1.0.1 | 修改代码规范Eslin | 2019年1月17日 | 否
+1.0.2 | 调试入口文件 | 2019年1月17日 | 否
+1.0.x | 优化配置文件 | 2019年1月x日 | 否
+
+## 六、未来新版本
+>1.1.0 版本需求<br>
+
+①工作区内节点拖拽<br>
+②优化传参和公共属性
+
 ![demo1](https://github.com/Liwengbin/vue-task-node/blob/master/src/assets/demo1.png)
 ![demo](https://github.com/Liwengbin/vue-task-node/blob/master/src/assets/demo.png)
+
+
