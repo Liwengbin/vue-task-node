@@ -112,6 +112,7 @@ export default {
       /* console.log("点击了右键",event,this.mousemenu); */
       if (this.mousemenu) {
         this.$setMouseData(this.mousemenu)
+        this.$setSelectData(this.node)
         let menulu = document.getElementById(this.mousemenu)
         let menu = menulu.parentNode
         menu.style.setProperty('display', 'block')
