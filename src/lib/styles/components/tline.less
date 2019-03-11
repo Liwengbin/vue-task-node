@@ -1,0 +1,25 @@
+@tline-prefix-cls: ~"@{css-prefix}tline";
+
+.@{tline-prefix-cls} {
+  cursor: default;
+
+  &-con {
+    fill: none;
+    stroke: hsla(0,0%,100%,0);
+    stroke-width: 15px;
+  }
+
+  &-con-wrap {
+    fill: none;
+    stroke: gray;
+    stroke-width: 1px;
+  }
+
+  &-dotted{
+    stroke: rgba(57,202,116,.8);
+    stroke-width: 2px;
+    stroke-dasharray: 5;
+    -webkit-animation: ant-line 30s infinite linear;
+    animation: ant-line 30s infinite linear;
+  }
+}

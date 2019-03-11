@@ -1,0 +1,24 @@
+@workarea-prefix-cls: ~"@{css-prefix}work-area";
+
+.@{workarea-prefix-cls} {
+    background-color: @body-background;
+    position: relative;
+    overflow: auto;
+  &::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #aeaeae;
+    min-height: 50px;
+    min-width: 50px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    -webkit-transition: background-color .2s;
+    -o-transition: background-color .2s;
+    transition: background-color .2s;
+  }
+  &::-webkit-scrollbar-track-piece {
+    background-color: #eee;
+  }
+}

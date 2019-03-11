@@ -1,0 +1,40 @@
+@port-prefix-cls: ~"@{css-prefix}port";
+@inport-prefix-cls: ~"@{css-prefix}port-in";
+@outport-prefix-cls: ~"@{css-prefix}port-out";
+
+.@{port-prefix-cls} {
+  width: 10px;
+  height: 10px;
+  float: right;
+  margin-right: -5px;
+  border: 1px solid gray;
+  border-radius: 50%;
+  background-color: #fff;
+
+  &-magnet {
+    float: left;
+    width: 20px;
+    height: 20px;
+    margin-top: -6px;
+    margin-left: -6px;
+    background-color: transparent;
+    border-radius: 50%;
+  }
+}
+
+.@{inport-prefix-cls} {
+  cursor: default;
+}
+.is-connected {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 5px 4px 0;
+  border-color: gray transparent transparent;
+  background-color: transparent;
+  border-radius: 0;
+  margin-top: 6px;
+}
+.@{outport-prefix-cls} {
+  cursor: crosshair;
+}

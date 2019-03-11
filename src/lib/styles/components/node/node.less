@@ -1,0 +1,19 @@
+@node-prefix-cls: ~"@{css-prefix}node";
+
+.@{node-prefix-cls} {
+  & body{
+    background-color: transparent;
+    overflow: visible;
+  }
+  & foreignObject {
+    background-color: transparent;
+    overflow: visible;
+  }
+  &:hover {
+    cursor: grab;
+    background-color:@node-select-color;
+  }
+  &-selected {
+    background-color: @node-select-color;
+  }
+}

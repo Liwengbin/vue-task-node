@@ -1,141 +1,160 @@
 <template>
   <div id="app">
+    <i class="task-icon-1"></i>
     <div class="hello" style="text-align: center">
-      <task-work-area id="area" style="width: 900px;height: 800px;display: inline-block;">
-
-        <task-curve-path areaID='area' :connection="connection"></task-curve-path>
-        <!--<task-path :start="{x:150,y:300}" :end="{x:300,y:400}"></task-path>-->
-
+      <task-work-area width=1000 height=500 id="areaID" v-on:on-drag-over="dragOver" v-on:on-mouse="mouseMenu" ref="area">
+        <task-curve-path areaid="areaID" :paths="paths" ref="curve"></task-curve-path>
         <template v-for="node in nodes">
-          <task-start-end-node :key="node.id" :selectNode="selectNode" mousemenu="menu_id" :node="node"></task-start-end-node>
+          <task-common-node :key="node.id" :node="node" v-on:on-select="selectlMethod" v-on:on-drag-start="dragStart" v-on:on-drag-end="dragEnd" :updateTem="updateCompleted" v-on:on-mouse="mouseNodeMenu"></task-common-node>
         </template>
-        <task-start-end-node mousemenu="menu_id"
-                             :node="{id:'node6',icon:'icon-task-get',title:'数据分组',state:'mistake',positionX:400,positionY:500}">
-          <task-in-port-list :inports="[{id:'data_in1',isConnected:true}]">
-            <task-in-port pid="data_in5"></task-in-port>
-          </task-in-port-list>
-          <task-out-port-list :outports="[{id:'data_out1',content:'表格'}]">
-            <task-out-port pid="data_out5"></task-out-port>
-          </task-out-port-list>
-        </task-start-end-node>
-
+        <task-initial-node :node="initialData" backgroundColor="#ff5722" v-on:on-select="selectlMethod" v-on:on-drag-start="dragStart" v-on:on-drag-end="dragEnd" :updateTem="updateCompleted" v-on:on-mouse="mouseNodeMenu"></task-initial-node>
       </task-work-area>
-
-      <task-mouse-menu id="menu_id">
-        <task-mouse-item :selectClick="updateNode" icon="icon-task-fuzhi"
-                         :mouse="{id:'xg',title:'修改'}"></task-mouse-item>
-        <task-mouse-item :selectClick="findNode" icon="icon-task-yulan" :mouse="{id:'ck',title:'查看'}"></task-mouse-item>
-        <task-mouse-item :selectClick="removeNode" icon="icon-task-shanchu"
-                         :mouse="{id:'sc',title:'删除'}"></task-mouse-item>
-        <task-mouse-item :selectClick="copyNode" icon="icon-task-jishufuwu"
-                         :mouse="{id:'fz',title:'复制'}"></task-mouse-item>
-        <task-mouse-item :selectClick="bugNode" icon="icon-task-sx-bug"
-                         :mouse="{id:'bug',title:'Bug'}"></task-mouse-item>
-      </task-mouse-menu>
     </div>
   </div>
 </template>
 
 <script>
-
 export default {
   name: 'App',
   data () {
     return {
+      startNode: {},
+      initialData: {
+        id: 'node4',
+        name: '节点4',
+        positionX: 300,
+        positionY: 60,
+        icon: 'task-icon-41',
+        inPorts: [],
+        outPorts: [{
+          id: 'node4_5'
+        }]
+      },
       nodes: [{
         id: 'node1',
-        icon: 'icon-task-chucun',
-        title: '数据',
+        name: '节点1',
+        positionX: 115,
+        positionY: 180,
         state: 'success',
-        positionX: 400,
-        positionY: 100,
-        inports: [],
-        outports: [{id: 'node1_out1', content: 'xml'}]
+        inPorts: [{
+          id: 'node1_1',
+          isConnected: true
+        }],
+        outPorts: [{
+          id: 'node1_4'
+        }]
       }, {
         id: 'node2',
-        icon: 'icon-task-liujisuan',
-        title: '数据格式化',
-        state: 'success',
-        positionX: 400,
-        positionY: 200,
-        inports: [{id: 'node2_in1', isConnected: true}],
-        outports: [{id: 'node2_out1', content: '表格'}, {id: 'node2_out2', content: 'Json'}, {
-          id: 'node2_out3',
-          content: 'xml'
+        name: '节点2',
+        positionX: 20,
+        positionY: 300,
+        state: 'mistake',
+        inPorts: [{
+          id: 'node2_1',
+          isConnected: true
+        }, {
+          id: 'node2_3',
+          isConnected: false
+        }],
+        outPorts: [{
+          id: 'node2_4'
+        }, {
+          id: 'node2_5'
         }]
       }, {
         id: 'node3',
-        icon: 'icon-task-tubiao-zhexiantu',
-        title: '折线图',
-        state: 'ready',
-        positionX: 200,
-        positionY: 500,
-        inports: [{id: 'node3_in1', isConnected: true}, {id: 'node3_in2', isConnected: false}],
-        outports: []
-      }, {
-        id: 'node4',
-        icon: 'icon-task-shenjing1',
-        title: '天气预测',
+        name: '节点3',
+        positionX: 340,
+        positionY: 315,
         state: 'running',
-        positionX: 400,
-        positionY: 300,
-        inports: [{id: 'node4_in1', isConnected: true}],
-        outports: [{id: 'node4_out1', content: '表格'}, {id: 'node4_out2', content: 'Json'}, {
-          id: 'node4_out3',
-          content: 'xml'
+        inPorts: [{
+          id: 'node3_1',
+          isConnected: true
+        }, {
+          id: 'node3_3',
+          isConnected: false
+        }],
+        outPorts: [{
+          id: 'node3_4'
         }]
       }, {
         id: 'node5',
-        icon: 'icon-task-ranqijiance',
-        title: '雷达图',
-        state: 'success',
-        positionX: 600,
-        positionY: 500,
-        inports: [{id: 'node5_in1', isConnected: true}],
-        outports: []
-      }, {
-        id: 'node6',
-        icon: 'icon-task-tubiao-zhuzhuangtu',
-        title: '条形图',
-        state: 'ready',
-        positionX: 400,
-        positionY: 600,
-        inports: [{id: 'node6_in1', isConnected: true}],
-        outports: []
+        name: '节点5',
+        positionX: 420,
+        positionY: 420,
+        icon: 'task-icon-6',
+        inPorts: [{
+          id: 'node5_1',
+          isConnected: true
+        }],
+        outPorts: []
       }],
-      connection: [{start: 'node1_out1', end: 'node2_in1'}, {
-        start: 'node2_out2',
-        end: 'node4_in1'
-      }, {start: 'node4_out1', end: 'node3_in1'}, {start: 'node4_out2', end: 'node5_in1'}, {
-        start: 'node4_out2',
-        end: 'data_in1'
-      }, {start: 'data_out1', end: 'node6_in1'}]
+      paths: [{
+        dotted: true,
+        ptype: 'Q',
+        startPort: 'node4_5',
+        endPort: 'node1_1'
+      }, {
+        dotted: true,
+        ptype: 'L',
+        startPort: 'node1_4',
+        endPort: 'node2_1'
+      }, {
+        dotted: false,
+        ptype: 'Q',
+        startPort: 'node1_4',
+        endPort: 'node3_1'
+      }, {
+        dotted: false,
+        ptype: 'L',
+        startPort: 'node3_4',
+        endPort: 'node5_1'
+      }]
     }
   },
   methods: {
-    updateNode: function (event, select) {
-      console.log(event, select)
+    selectlMethod: function (event, data, node) {
+      console.log(event, data, node)
     },
-    findNode: function (event, select) {
-      console.log(event, select)
+    dragStart: function (event, node) {
+      let nodeData = event.dataTransfer.getData('nodedata')
+      console.log('开始移动', event.clientX, event.clientY, node, JSON.parse(nodeData))
+      this.startNode = {id: node.id, positionX: event.clientX, positionY: event.clientY}
     },
-    removeNode: function (event, select) {
-      console.log(event, select)
+    dragEnd: function (event, node) {
+      let me = this
+      console.log('移动结束', event.clientX, event.clientY, node)
+      this.nodes.forEach(function (item) {
+        if (item.id === node.id) {
+          item.positionX = node.positionX + (event.clientX - me.startNode.positionX)
+          item.positionY = node.positionY + (event.clientY - me.startNode.positionY)
+        }
+      })
+      if (node.id === this.initialData.id) {
+        this.initialData.positionX = node.positionX + (event.clientX - me.startNode.positionX)
+        this.initialData.positionY = node.positionY + (event.clientY - me.startNode.positionY)
+      }
     },
-    copyNode: function (event, select) {
-      console.log(event, select)
+    dragOver: function (event) {
+      console.log('移动中...', event.clientX, event.clientY)
     },
-    bugNode: function (event, select) {
-      console.log(event, select)
+    updateCompleted: function () {
+      console.log('updateCompleted!!')
+      // 重新加载路径
+      this.$refs.curve.vReload()
     },
-    selectNode (event, node) {
+    mouseMenu: function (event, id) {
+      console.log(event, id)
+    },
+    mouseNodeMenu: function (event, node) {
       console.log(event, node)
     }
   }
 }
 </script>
 
-<style>
+<style lang="less">
+  // @import "lib/styles/index.less";
   #app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;

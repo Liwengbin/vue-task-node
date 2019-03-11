@@ -1,0 +1,56 @@
+@common-prefix-cls: ~"@{css-prefix}common-node";
+
+.@{common-prefix-cls} {
+  width: 180px;
+  height: 30px;
+  background-color: hsla(0,0%,100%,.9);
+  border: 1px solid #289de9;
+  border-radius: 15px;
+  font-size: 12px;
+  -webkit-transition: background-color .2s;
+  transition: background-color .2s;
+
+  &-icon {
+    float: left;
+    color: #fff;
+    font-size: 16px;
+    background-color: #289de9;
+    width: 26px;
+    height: 26px;
+    margin: 1px;
+    border-radius: 100%;
+
+    &:before{
+      float: left;
+      margin: 4px;
+    }
+  }
+
+  &-name {
+    float: left;
+    margin-left: 2px;
+    width: 120px;
+    height: 28px;
+    line-height: 28px;
+    font-size: 14px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  &-status {
+    width: 26px;
+    height: 26px;
+    margin: 1px;
+    border-radius: 100%;
+    float: right;
+    font-size: 18px;
+
+    &:before{
+      float: left;
+      margin: 4px;
+    }
+  }
+  &:hover {
+    background-color: @node-select-color ;
+  }
+}

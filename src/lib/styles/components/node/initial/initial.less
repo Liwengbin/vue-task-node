@@ -1,0 +1,47 @@
+@initial-prefix-cls: ~"@{css-prefix}initial-node";
+
+.@{initial-prefix-cls} {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  &-in-wrap {
+    clear: both;
+    margin-top: -34px;
+    float: left;
+    width: 30px;
+  }
+  &-out-wrap {
+    clear: both;
+    margin-top: -5px;
+    float: left;
+    width: 30px;
+  }
+  &-name {
+    float: left;
+    width: 30px;
+    height: 28px;
+    line-height: 28px;
+    font-size: 14px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  &-icon {
+    float: left;
+    color: #000;
+    font-size: 16px;
+    width: 26px;
+    height: 26px;
+    margin: 1px;
+    border-radius: 100%;
+
+    &:before{
+      float: left;
+      margin: 4px;
+    }
+  }
+  &:hover {
+    background-color: @node-select-color ;
+  }
+}
