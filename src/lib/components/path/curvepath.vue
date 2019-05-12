@@ -4,6 +4,8 @@
       <t-line :key="index" :portData="item" >
       </t-line>
     </template>
+      <t-line v-if="path.isShow" :portData="path" >
+      </t-line>
   </g>
 </template>
 <script>
@@ -24,7 +26,22 @@ export default {
     }
   },
   watch: {
-
+    paths (newData, oldData) {
+      this.vReload()
+    }
+  },
+  computed: {
+    path: function () {
+      let pa = this.$store.getters.getPathData
+      let isShow = pa.isShow
+      if (pa.Mxy) {
+        pa = this.computeXY(pa.Mxy, pa.Txy, true)
+      }
+      pa.isShow = isShow
+      pa.dotted = false
+      pa.ptype = 'Q'
+      return pa
+    }
   },
   mounted: function () {
     this.vReload()
@@ -36,18 +53,8 @@ export default {
       this.paths.forEach((o) => {
         let vstart = document.getElementById(o.startPort)
         let vend = document.getElementById(o.endPort)
-        let area = document.getElementById(me.areaid)
         if (vend && vstart) {
-          let obj = {
-            Mxy: {
-              x: vstart.getBoundingClientRect().left - area.getBoundingClientRect().left + 5,
-              y: vstart.getBoundingClientRect().top - area.getBoundingClientRect().top + 5
-            },
-            Txy: {
-              x: vend.getBoundingClientRect().left - area.getBoundingClientRect().left + 4,
-              y: vend.getBoundingClientRect().top - area.getBoundingClientRect().top + 4
-            }
-          }
+          let obj = me.computeXY(vstart, vend, false)
           if (o.dotted) {
             obj.dotted = o.dotted
           }
@@ -57,6 +64,34 @@ export default {
           me.con.push(obj)
         }
       })
+    },
+    computeXY (vstart, vend, isBing) {
+      let area = document.getElementById(this.areaid)
+      let obj = {}
+      if (isBing) {
+        obj = {
+          Mxy: {
+            x: vstart.x - area.getBoundingClientRect().left,
+            y: vstart.y - area.getBoundingClientRect().top
+          },
+          Txy: {
+            x: vend.x - area.getBoundingClientRect().left,
+            y: vend.y - area.getBoundingClientRect().top
+          }
+        }
+      } else {
+        obj = {
+          Mxy: {
+            x: vstart.getBoundingClientRect().left - area.getBoundingClientRect().left + 5,
+            y: vstart.getBoundingClientRect().top - area.getBoundingClientRect().top + 5
+          },
+          Txy: {
+            x: vend.getBoundingClientRect().left - area.getBoundingClientRect().left + 4,
+            y: vend.getBoundingClientRect().top - area.getBoundingClientRect().top + 4
+          }
+        }
+      }
+      return obj
     }
   }
 }

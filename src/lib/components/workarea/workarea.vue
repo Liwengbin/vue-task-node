@@ -1,6 +1,6 @@
 <template>
   <div :class="classes" :style="areaStyles" @contextmenu.prevent="mouseMenu">
-        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" :width="width" :height="height" :id="id" @dragover='dragOver($event)'>
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" :width="width" :height="height" :id="id">
           <g transform="translate(0,0) scale(1,1)">
             <g>
               <slot></slot>
@@ -45,9 +45,6 @@ export default {
     }
   },
   methods: {
-    dragOver: function (event) {
-      this.$emit('on-drag-over', event)
-    },
     mouseMenu: function (event) {
       this.$emit('on-mouse', event, this.id)
     }

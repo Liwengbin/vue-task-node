@@ -1,5 +1,5 @@
 <template>
-  <div :class="[isConnected ? isCls:classes]" :id="pid">
+  <div :class="[isConnected ? isCls:classes]" :id="pid" @dragover.prevent=dragPortOver($event) @drop.prevent='inDropPort($event)' @dragenter="dragEnter" @dragleave="dragLeave">
       <span :class="magnetCls"></span>
   </div>
 </template>
@@ -10,6 +10,7 @@ export default {
   name: 'InPort',
   data () {
     return {
+      className: null
     }
   },
   props: {
@@ -41,6 +42,29 @@ export default {
         `${prefixCls}-in`,
         `is-connected`
       ]
+    }
+  },
+  methods: {
+    inDropPort: function (event) {
+      if (this.className) {
+        let _this = event.target.parentNode
+        _this.className = this.className
+      }
+      let startData = event.dataTransfer.getData('portStart')
+      if (startData) {
+        this.$emit('on-add-path', event, startData, this.pid)
+      }
+    },
+    dragPortOver: function (event) {
+    },
+    dragEnter: function (event) {
+      let _this = event.target.parentNode
+      this.className = _this.className
+      _this.className = 'task-port task-in-out'
+    },
+    dragLeave: function (event) {
+      let _this = event.target.parentNode
+      _this.className = this.className
     }
   }
 }

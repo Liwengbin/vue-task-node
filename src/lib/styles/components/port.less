@@ -1,6 +1,7 @@
 @port-prefix-cls: ~"@{css-prefix}port";
 @inport-prefix-cls: ~"@{css-prefix}port-in";
 @outport-prefix-cls: ~"@{css-prefix}port-out";
+@inout-prefix-cls: ~"@{css-prefix}in-out";
 
 .@{port-prefix-cls} {
   width: 10px;
@@ -24,7 +25,25 @@
 
 .@{inport-prefix-cls} {
   cursor: default;
+
+  &:hover {
+    border: 1px solid #2d8cf0;
+    width: 10px;
+    height: 10px;
+    box-shadow: 0px 0px 1px 3px #57a3f3;
+    border-radius: 50%;
+    margin-top: -1px;
+  }
 }
+.@{inout-prefix-cls} {
+  border: 1px solid #2d8cf0;
+  width: 10px;
+  height: 10px;
+  box-shadow: 0px 0px 1px 3px #57a3f3;
+  border-radius: 50%;
+  margin-top: -1px;
+}
+
 .is-connected {
   width: 0;
   height: 0;

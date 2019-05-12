@@ -3,7 +3,7 @@
     <g transform="scale(1,1)" class="pane-scalable">
       <foreignObject :width="width" :height="height">
         <body xmlns="http://www.w3.org/1999/xhtml">
-            <div @click=selectNodeMethod($event,node,$refs.node) ref="node" draggable="true" @dragstart='dragStart($event)' @dragend="dragEnd($event,node)" @contextmenu.prevent="mouseMenu">
+            <div @click=selectNodeMethod($event,node,$refs.node) ref="node" draggable="true" @drag='dragGing($event)' @dragstart='dragStart($event)' @dragend="dragEnd($event,node)" @contextmenu="mouseMenu">
               <slot></slot>
             </div>
         </body>
@@ -52,6 +52,9 @@ export default {
     dragStart: function (event) {
       event.dataTransfer.setData('nodedata', JSON.stringify(this.node))
       this.$emit('on-drag-start', event, this.node)
+    },
+    dragGing: function (event) {
+      this.$emit('on-drag-ging', event)
     },
     dragEnd: function (event, node) {
       this.$emit('on-drag-end', event, node)

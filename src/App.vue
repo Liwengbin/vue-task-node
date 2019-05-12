@@ -2,12 +2,12 @@
   <div id="app">
     <i class="task-icon-1"></i>
     <div class="hello" style="text-align: center">
-      <task-work-area width=1000 height=500 id="areaID" v-on:on-drag-over="dragOver" v-on:on-mouse="mouseMenu" ref="area">
+      <task-work-area width=1000 height=500 id="areaID" v-on:on-mouse="mouseMenu" ref="area">
         <task-curve-path areaid="areaID" :paths="paths" ref="curve"></task-curve-path>
         <template v-for="node in nodes">
-          <task-common-node :key="node.id" :node="node" v-on:on-select="selectlMethod" v-on:on-drag-start="dragStart" v-on:on-drag-end="dragEnd" :updateTem="updateCompleted" v-on:on-mouse="mouseNodeMenu"></task-common-node>
+          <task-common-node :key="node.id" :node="node" v-on:on-add-path="addPath" v-on:on-select="selectlMethod" v-on:on-drag-start="dragStart" v-on:on-drag-ging="dragGing" v-on:on-drag-end="dragEnd" :updateTem="updateCompleted" v-on:on-mouse="mouseNodeMenu"></task-common-node>
         </template>
-        <task-initial-node :node="initialData" backgroundColor="#ff5722" v-on:on-select="selectlMethod" v-on:on-drag-start="dragStart" v-on:on-drag-end="dragEnd" :updateTem="updateCompleted" v-on:on-mouse="mouseNodeMenu"></task-initial-node>
+        <task-initial-node :node="initialData" backgroundColor="#ff5722" v-on:on-add-path="addPath" v-on:on-select="selectlMethod" v-on:on-drag-start="dragStart" v-on:on-drag-ging="dragGing" v-on:on-drag-end="dragEnd" :updateTem="updateCompleted" v-on:on-mouse="mouseNodeMenu"></task-initial-node>
       </task-work-area>
     </div>
   </div>
@@ -135,7 +135,26 @@ export default {
         this.initialData.positionY = node.positionY + (event.clientY - me.startNode.positionY)
       }
     },
-    dragOver: function (event) {
+    addPath: function (event, startData, endData) {
+      let me = this
+      console.log(event, startData, endData)
+      this.nodes.forEach(function (item) {
+        item.inPorts.forEach(function (ins) {
+          if (ins.id === endData) {
+            ins.isConnected = true
+          }
+        })
+      })
+      setTimeout(function () {
+        me.paths.push({
+          dotted: false,
+          ptype: 'Q',
+          startPort: startData,
+          endPort: endData
+        })
+      }, 200)
+    },
+    dragGing: function (event) {
       console.log('移动中...', event.clientX, event.clientY)
     },
     updateCompleted: function () {

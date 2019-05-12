@@ -1,5 +1,5 @@
 <template>
-  <node :node="node" width=30 height=30 v-on:on-select="selectNodeMethod" v-on:on-drag-start="dragStart" v-on:on-drag-end="dragEnd" v-on:updateTem="updateTemp" v-on:on-mouse="mouseMenu">
+  <node :node="node" width=30 height=30 v-on:on-select="selectNodeMethod" v-on:on-drag-ging="dragGing" v-on:on-drag-start="dragStart" v-on:on-drag-end="dragEnd" v-on:updateTem="updateTemp" v-on:on-mouse="mouseMenu">
     <div :class="classes" :style="'background-color: '+ backgroundColor">
       <span :class="iconCls +' '+ [node.icon ? node.icon : 'task-icon-53']"></span>
       <div v-if="isEmpty(node.inPorts) && node.inPorts.length > 0" :class="wrapInCls">

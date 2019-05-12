@@ -1,10 +1,10 @@
 <template>
-<node :node="node" width=180 height=30 v-on:on-select="selectNodeMethod" v-on:on-drag-start="dragStart" v-on:on-drag-end="dragEnd" v-on:updateTem="updateTemp" v-on:on-mouse="mouseMenu">
+<node :node="node" width=180 height=30 v-on:on-select="selectNodeMethod" v-on:on-drag-ging="dragGing" v-on:on-drag-start="dragStart" v-on:on-drag-end="dragEnd" v-on:updateTem="updateTemp" v-on:on-mouse="mouseMenu">
   <div :class="classes">
     <span :class="iconCls +' '+ [node.icon ? node.icon : 'task-icon-53']"></span>
     <span :class="nameCls">{{node.name}}</span>
     <span :class="statusCls +' '+ stateCls(node.state)"></span>
-    <in-common-ls :in_ports="node.inPorts"></in-common-ls>
+    <in-common-ls :in_ports="node.inPorts" v-on:on-add-path='addPath'></in-common-ls>
     <out-common-ls :out_ports="node.outPorts"></out-common-ls>
   </div>
 </node>
