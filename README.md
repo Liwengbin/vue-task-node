@@ -3,7 +3,7 @@
 >在线Demo <br>
 1.0.x 版本 [https://codesandbox.io/s/9413yop49r](https://codesandbox.io/s/9413yop49r)<br>
 1.1.x 版本 [https://codesandbox.io/s/2wv588orlr](https://codesandbox.io/s/2wv588orlr)
-
+1.2.x 版本 []()
 >vue-task-node 是一个基于Vue的任务节点图绘制插件（vue-task-node is a Vue based task node mapping plug-in）
 
 >✉：liwenbingmsc@qq.com
@@ -56,4 +56,5 @@ new Vue({
    1.1.4 | 解决index.js找不到组件问题 | 2019年2月28日 | 是 | 否
    1.1.5 | 调整工作区样式问题 | 2019年3月1日 | 是 | 否
    1.1.6 | 调整节点的事件传递 | 2019年3月1日 | 是 | 否
+   1.2.0 | 新增节点连线 | 2019年5月12日 | 是 | 是
   
