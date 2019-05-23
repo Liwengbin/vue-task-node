@@ -3,7 +3,8 @@
 >在线Demo <br>
 1.0.x 版本 [https://codesandbox.io/s/9413yop49r](https://codesandbox.io/s/9413yop49r)<br>
 1.1.x 版本 [https://codesandbox.io/s/2wv588orlr](https://codesandbox.io/s/2wv588orlr)<br>
-最新版本Demo [https://codesandbox.io/s/5vvpyj792x](https://codesandbox.io/s/5vvpyj792x)
+最新版本Demo [https://codesandbox.io/s/5vvpyj792x](https://codesandbox.io/s/5vvpyj792x)<br>
+
 >vue-task-node 是一个基于Vue的任务节点图绘制插件（vue-task-node is a Vue based task node mapping plug-in）
 
 >✉：liwenbingmsc@qq.com
