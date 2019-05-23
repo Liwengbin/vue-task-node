@@ -1,10 +1,10 @@
 <template>
   <g ref="gss">
     <template v-if="con.length > 0" v-for="(item,index) in con">
-      <t-line :key="index" :portData="item" >
+      <t-line :key="index" :portData="item" v-on:on-mouse="mouseFn" v-on:on-mouse-over="mouseOverFn" v-on:on-mouse-out="mouseOutFn">
       </t-line>
     </template>
-      <t-line v-if="path.isShow" :portData="path" >
+      <t-line v-if="path.isShow" :portData="path">
       </t-line>
   </g>
 </template>
@@ -61,6 +61,8 @@ export default {
           if (o.ptype) {
             obj.ptype = o.ptype
           }
+          obj.startPort = o.startPort
+          obj.endPort = o.endPort
           me.con.push(obj)
         }
       })
@@ -92,6 +94,15 @@ export default {
         }
       }
       return obj
+    },
+    mouseFn (event, portData) {
+      this.$emit('on-mouse', event, portData)
+    },
+    mouseOverFn (event, portData) {
+      this.$emit('on-mouse-over', event, portData)
+    },
+    mouseOutFn (event, portData) {
+      this.$emit('on-mouse-out', event, portData)
     }
   }
 }

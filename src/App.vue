@@ -3,7 +3,7 @@
     <i class="task-icon-1"></i>
     <div class="hello" style="text-align: center">
       <task-work-area width=1000 height=500 id="areaID" v-on:on-mouse="mouseMenu" ref="area">
-        <task-curve-path areaid="areaID" :paths="paths" ref="curve"></task-curve-path>
+        <task-curve-path areaid="areaID" :paths="paths" ref="curve" v-on:on-mouse="mouseFn" v-on:on-mouse-over="mouseOverFn" v-on:on-mouse-out="mouseOutFn"></task-curve-path>
         <template v-for="node in nodes">
           <task-common-node :key="node.id" :node="node" v-on:on-add-path="addPath" v-on:on-select="selectlMethod" v-on:on-drag-start="dragStart" v-on:on-drag-ging="dragGing" v-on:on-drag-end="dragEnd" :updateTem="updateCompleted" v-on:on-mouse="mouseNodeMenu"></task-common-node>
         </template>
@@ -113,17 +113,26 @@ export default {
     }
   },
   methods: {
+    mouseFn (event, portData) {
+      console.log('mouseFn', 'on-mouse', '鼠标右击路径事件', event, portData)
+    },
+    mouseOverFn (event, portData) {
+      console.log('mouseFn', 'on-mouse-over', '鼠标划入路径事件', event, portData)
+    },
+    mouseOutFn (event, portData) {
+      console.log('mouseFn', 'on-mouse-out', '鼠标划出路径事件', event, portData)
+    },
     selectlMethod: function (event, data, node) {
-      console.log(event, data, node)
+      console.log('selectlMethod', 'on-select', '节点左键点击事件', event, data, node)
     },
     dragStart: function (event, node) {
       let nodeData = event.dataTransfer.getData('nodedata')
-      console.log('开始移动', event.clientX, event.clientY, node, JSON.parse(nodeData))
+      console.log('节点开始移动', event.clientX, event.clientY, node, JSON.parse(nodeData))
       this.startNode = {id: node.id, positionX: event.clientX, positionY: event.clientY}
     },
     dragEnd: function (event, node) {
       let me = this
-      console.log('移动结束', event.clientX, event.clientY, node)
+      console.log('节点移动结束', event.clientX, event.clientY, node)
       this.nodes.forEach(function (item) {
         if (item.id === node.id) {
           item.positionX = node.positionX + (event.clientX - me.startNode.positionX)
@@ -137,7 +146,7 @@ export default {
     },
     addPath: function (event, startData, endData) {
       let me = this
-      console.log(event, startData, endData)
+      console.log('添加路径', event, startData, endData)
       this.nodes.forEach(function (item) {
         item.inPorts.forEach(function (ins) {
           if (ins.id === endData) {
@@ -155,7 +164,7 @@ export default {
       }, 200)
     },
     dragGing: function (event) {
-      console.log('移动中...', event.clientX, event.clientY)
+      console.log('节点移动中...', event.clientX, event.clientY)
     },
     updateCompleted: function () {
       console.log('updateCompleted!!')
@@ -163,10 +172,10 @@ export default {
       this.$refs.curve.vReload()
     },
     mouseMenu: function (event, id) {
-      console.log(event, id)
+      console.log('mouseMenu', 'on-mouse', '工作区右击事件', event, id)
     },
     mouseNodeMenu: function (event, node) {
-      console.log(event, node)
+      console.log('mouseNodeMenu', 'on-mouse', '节点右击事件', event, node)
     }
   }
 }
@@ -174,15 +183,15 @@ export default {
 
 <style lang="less">
   // @import "lib/styles/index.less";
-  #app {
-    font-family: 'Avenir', Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    color: #2c3e50;
-    padding: 50px;
-    background-color: #cccccc;
-  }
+  /*#app {*/
+    /*font-family: 'Avenir', Helvetica, Arial, sans-serif;*/
+    /*-webkit-font-smoothing: antialiased;*/
+    /*-moz-osx-font-smoothing: grayscale;*/
+    /*text-align: center;*/
+    /*color: #2c3e50;*/
+    /*padding: 50px;*/
+    /*background-color: #cccccc;*/
+  /*}*/
 </style>
 
 <!--

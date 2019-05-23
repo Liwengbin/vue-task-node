@@ -5,6 +5,7 @@ import {Path, CurvePath} from '../lib/components/path'
 import Node from '../lib/components/node'
 import Common from '../lib/components/node/common'
 import Initial from '../lib/components/node/initial'
+import store from '../lib/store'
 const views = {
   TaskWorkArea: WorkArea,
   TaskInPort: InPort,
@@ -21,4 +22,5 @@ const install = function (Vue, opts = {}) {
   })
 }
 
-export default install
+export const TaskNode = install
+export const TaskNodeStore = store

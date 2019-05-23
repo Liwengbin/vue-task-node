@@ -1,8 +1,8 @@
 <template>
   <g :class="classes">
-    <path :class="conWrapCls" :d="drawCurvePath(portData.Mxy, portData.Txy)">
+    <path :class="conWrapCls" ref="wrap" :d="drawCurvePath(portData.Mxy, portData.Txy)">
     </path>
-    <path :class="conCls" :d="lpath">
+    <path :class="conCls" ref="con" :d="lpath" @contextmenu.prevent="mouseFn">
     </path>
   </g>
 </template>
@@ -33,6 +33,12 @@ export default {
       Txy: {
         x: [String, Number],
         y: [String, Number]
+      },
+      startPort: {
+        type: [String, Number]
+      },
+      endPort: {
+        type: [String, Number]
       }
     }
   },
@@ -53,7 +59,27 @@ export default {
         `${prefixCls}-con-wrap`,
         me.portData.dotted ? `${prefixCls}-dotted` : ``
       ]
+    },
+    conWrapHoverCls () {
+      return [
+        `${prefixCls}-hover`
+      ]
     }
+  },
+  mounted: function () {
+    let me = this
+    // let nameSpace = 'http://www.w3.org/2000/svg'
+    let _this = this.$refs.con
+    _this.addEventListener('mouseover', function () {
+      let wr = me.$refs.wrap
+      wr.classList.add(me.conWrapHoverCls)
+      me.$emit('on-mouse-over', wr, me.portData)
+    })
+    _this.addEventListener('mouseout', function () {
+      let wr = me.$refs.wrap
+      wr.classList.remove(me.conWrapHoverCls)
+      me.$emit('on-mouse-out', wr, me.portData)
+    })
   },
   methods: {
     drawCurvePath (Mxy, Txy) {
@@ -61,6 +87,10 @@ export default {
         this.lpath = Line.drawCurvePath(Mxy, Txy, this.portData.ptype)
       }
       return this.lpath
+    },
+    mouseFn (event) {
+      event.stopPropagation()
+      this.$emit('on-mouse', event, this.portData)
     }
   }
 }

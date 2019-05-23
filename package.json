@@ -1,6 +1,6 @@
 {
   "name": "vue-task-node",
-  "version": "1.1.6",
+  "version": "1.2.1",
   "description": "TaskNode Plugin! vue-task-node is a Vue based task node mapping plug-in",
   "author": "wenbing.li",
   "license": "MIT",
@@ -19,7 +19,8 @@
   "dependencies": {
     "less": "^3.9.0",
     "less-loader": "^4.1.0",
-    "vue": "^2.5.2"
+    "vue": "^2.5.2",
+    "vuex": "^3.1.1"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",

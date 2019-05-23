@@ -1,5 +1,5 @@
 @tline-prefix-cls: ~"@{css-prefix}tline";
-
+@hover-prefix-cls: ~"@{css-prefix}tline-hover";
 .@{tline-prefix-cls} {
   cursor: default;
 
@@ -22,4 +22,9 @@
     -webkit-animation: ant-line 30s infinite linear;
     animation: ant-line 30s infinite linear;
   }
+}
+.@{hover-prefix-cls} {
+  fill: none;
+  stroke: #aeaeae;
+  stroke-width: 3px;
 }

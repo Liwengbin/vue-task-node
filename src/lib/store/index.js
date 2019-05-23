@@ -1,6 +1,3 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-Vue.use(Vuex)
 const state = {
   pathData: {
     isShow: false
@@ -21,10 +18,10 @@ const actions = {
     commit('setPath', name)
   }
 }
-const store = new Vuex.Store({
+const store = {
   state,
   getters,
   mutations,
   actions
-})
+}
 export default store

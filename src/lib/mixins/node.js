@@ -12,8 +12,14 @@ export default {
     dragStart: function (event, node) {
       this.$emit('on-drag-start', event, node)
     },
+    dragGing: function (event) {
+      this.$emit('on-drag-ging', event)
+    },
     dragEnd: function (event, node) {
       this.$emit('on-drag-end', event, node)
+    },
+    addPath: function (event, start, end) {
+      this.$emit('on-add-path', event, start, end)
     },
     mouseMenu: function (event, node) {
       this.$emit('on-mouse', event, node)

@@ -3,7 +3,7 @@
     <g transform="scale(1,1)" class="pane-scalable">
       <foreignObject :width="width" :height="height">
         <body xmlns="http://www.w3.org/1999/xhtml">
-            <div @click=selectNodeMethod($event,node,$refs.node) ref="node" draggable="true" @drag='dragGing($event)' @dragstart='dragStart($event)' @dragend="dragEnd($event,node)" @contextmenu="mouseMenu">
+            <div @click=selectNodeMethod($event,node,$refs.node) ref="node" draggable="true" @drag='dragGing($event)' @dragstart='dragStart($event)' @dragend="dragEnd($event,node)" @contextmenu.prevent="mouseMenu">
               <slot></slot>
             </div>
         </body>
