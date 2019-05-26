@@ -4,6 +4,7 @@
 1.0.x 版本 [https://codesandbox.io/s/9413yop49r](https://codesandbox.io/s/9413yop49r)<br>
 1.1.x 版本 [https://codesandbox.io/s/2wv588orlr](https://codesandbox.io/s/2wv588orlr)<br>
 最新版本Demo [https://codesandbox.io/s/5vvpyj792x](https://codesandbox.io/s/5vvpyj792x)<br>
+在线教程：http://vidanao.com
 
 >vue-task-node 是一个基于Vue的任务节点图绘制插件（vue-task-node is a Vue based task node mapping plug-in）
 
@@ -39,7 +40,7 @@ new Vue({
 ```
 ## 三、教程
 
-> http://vidanao.com/vnode //次教程是1.1.x版本的教程，最新版本的教程预计2019-5-26日出
+> http://vidanao.com 最新教程
 
 ## 四、版本
    
@@ -60,4 +61,4 @@ new Vue({
    1.1.6 | 调整节点的事件传递 | 2019年3月1日 | 是 | 否
    1.2.0 | 新增节点连线 | 2019年5月12日 | 是 | 是
    1.2.1 | 新增路径鼠标事件 | 2019年5月23日 | 是 | 是
-  
+   1.2.2 | 修改混入 | 2019年5月25日 | 是 | 是
