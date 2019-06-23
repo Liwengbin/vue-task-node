@@ -5,7 +5,9 @@ import {Path, CurvePath} from '../lib/components/path'
 import Node from '../lib/components/node'
 import Common from '../lib/components/node/common'
 import Initial from '../lib/components/node/initial'
+import NodeModel from '../lib/components/nodemodel'
 import store from '../lib/store'
+import nodemix from '../lib/mixins/node'
 const views = {
   TaskWorkArea: WorkArea,
   TaskInPort: InPort,
@@ -14,7 +16,8 @@ const views = {
   TaskInitialNode: Initial,
   TaskNode: Node,
   TaskPath: Path,
-  TaskCurvePath: CurvePath
+  TaskCurvePath: CurvePath,
+  TaskNodeModel: NodeModel
 }
 const install = function (Vue, opts = {}) {
   Object.keys(views).forEach(key => {
@@ -24,3 +27,4 @@ const install = function (Vue, opts = {}) {
 
 export const TaskNode = install
 export const TaskNodeStore = store
+export const NodeMix = nodemix

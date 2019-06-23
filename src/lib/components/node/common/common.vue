@@ -53,10 +53,12 @@ export default {
         default: 'ready'
       },
       inPorts: {
-        type: Array
+        type: Array,
+        default: []
       },
       outPorts: {
-        type: Array
+        type: Array,
+        default: []
       }
     }
   },

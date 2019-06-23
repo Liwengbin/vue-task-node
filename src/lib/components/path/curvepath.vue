@@ -18,7 +18,11 @@ export default {
     paths: {
       type: Array
     },
-    areaid: [String, Number]
+    areaid: [String, Number],
+    pathtype: {
+      type: [String, Number],
+      default: 'Q'
+    }
   },
   data () {
     return {
@@ -39,7 +43,7 @@ export default {
       }
       pa.isShow = isShow
       pa.dotted = false
-      pa.ptype = 'Q'
+      pa.ptype = this.pathtype
       return pa
     }
   },
@@ -89,7 +93,7 @@ export default {
           },
           Txy: {
             x: vend.getBoundingClientRect().left - area.getBoundingClientRect().left + 4,
-            y: vend.getBoundingClientRect().top - area.getBoundingClientRect().top + 4
+            y: vend.getBoundingClientRect().top - area.getBoundingClientRect().top + 0
           }
         }
       }

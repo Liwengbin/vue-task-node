@@ -52,6 +52,7 @@ export default {
       icon: [String, Number],
       inPorts: {
         type: Array,
+        default: [],
         validator: function (value) {
           if (value && value.length > 1) {
             return false
@@ -61,6 +62,7 @@ export default {
       },
       outPorts: {
         type: Array,
+        default: [],
         validator: function (value) {
           if (value && value.length > 1) {
             return false

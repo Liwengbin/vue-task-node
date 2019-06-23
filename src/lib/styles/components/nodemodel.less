@@ -1,0 +1,24 @@
+@nodemodel-prefix-cls: ~"@{css-prefix}node-model";
+
+.@{nodemodel-prefix-cls} {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: block;
+  border-radius: 13px;
+  border: 1px solid transparent;
+  cursor: -webkit-grab;
+  &:hover {
+    cursor: grab;
+    background-color: #fff;
+    border-color: #289de9;
+  }
+
+  &-label {
+    height: 26px;
+    line-height: 26px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}

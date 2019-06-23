@@ -13,10 +13,9 @@ export default {
   calculatedCurvePathQ (Mxy = {}, Txy = {}) {
     let mtx = Math.floor((Txy.x - Mxy.x) / 4)
     let mty = Math.floor((Txy.y - Mxy.y) / 4)
-
-    if (mty < 0 && mtx > 10) {
-      if (mty > -10) {
-        this.Q1xy = new XYObject(Mxy.x + 10, Mxy.y + 10)
+    if (mty < 0 && (mtx > 10 || mtx < -10)) {
+      if (mty > -10 && mty < 10) {
+        this.Q1xy = new XYObject(Mxy.x + 10, Mxy.y + 30)
       } else {
         this.Q1xy = new XYObject(Mxy.x + 10, Mxy.y + 4 * Math.abs(mty))
       }
@@ -53,6 +52,16 @@ export default {
     return this.path
   },
   /**
+   * 计算直线 ML线
+   * @param Mxy 起点坐标
+   * @param Txy 结束坐标
+   * @returns {string} 'M xy Lxy'
+   */
+  calculatedCurvePathML (Mxy = {}, Txy = {}) {
+    this.path = 'M' + Mxy.x + ' ' + Mxy.y + ' L ' + Txy.x + ' ' + Txy.y
+    return this.path
+  },
+  /**
    * 获取曲线路径
    * @param Mxy 起点坐标
    * @param Txy 结束坐标
@@ -63,6 +72,8 @@ export default {
       return this.calculatedCurvePathQ(Mxy, Txy)
     } else if (type === 'L') {
       return this.calculatedCurvePathL(Mxy, Txy)
+    } else if (type === 'ML') {
+      return this.calculatedCurvePathML(Mxy, Txy)
     }
   }
 }

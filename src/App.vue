@@ -1,14 +1,24 @@
 <template>
   <div id="app">
-    <i class="task-icon-1"></i>
     <div class="hello" style="text-align: center">
-      <task-work-area width=1000 height=500 id="areaID" v-on:on-mouse="mouseMenu" ref="area">
-        <task-curve-path areaid="areaID" :paths="paths" ref="curve" v-on:on-mouse="mouseFn" v-on:on-mouse-over="mouseOverFn" v-on:on-mouse-out="mouseOutFn"></task-curve-path>
-        <template v-for="node in nodes">
-          <task-common-node :key="node.id" :node="node" v-on:on-add-path="addPath" v-on:on-select="selectlMethod" v-on:on-drag-start="dragStart" v-on:on-drag-ging="dragGing" v-on:on-drag-end="dragEnd" :updateTem="updateCompleted" v-on:on-mouse="mouseNodeMenu"></task-common-node>
-        </template>
-        <task-initial-node :node="initialData" backgroundColor="#ff5722" v-on:on-add-path="addPath" v-on:on-select="selectlMethod" v-on:on-drag-start="dragStart" v-on:on-drag-ging="dragGing" v-on:on-drag-end="dragEnd" :updateTem="updateCompleted" v-on:on-mouse="mouseNodeMenu"></task-initial-node>
-      </task-work-area>
+      <div class="node-model cell-left">
+        <ul>
+          <li style="border-bottom: 2px solid aliceblue;" v-for="nodeM in nodeModels" :key="nodeM.id">
+            <task-node-model :node="nodeM">
+              <span class="task-node-model-label">{{nodeM.name}}</span>
+            </task-node-model>
+          </li>
+        </ul>
+      </div>
+      <div class="cell-right">
+        <task-work-area width=1000 height=500 :id="work_id" v-on:on-add-nodemodel="onAddNodeModel" v-on:on-mouse="mouseMenu" ref="area">
+          <task-curve-path :areaid="work_id" :paths="paths" ref="curve" v-on:on-mouse="mouseFn" v-on:on-mouse-over="mouseOverFn" v-on:on-mouse-out="mouseOutFn"></task-curve-path>
+          <template v-for="node in nodes">
+            <task-common-node :key="node.id" :node="node" v-on:on-add-path="addPath" v-on:on-select="selectlMethod" v-on:on-drag-start="dragStart" v-on:on-drag-ging="dragGing" v-on:on-drag-end="dragEnd" :updateTem="updateCompleted" v-on:on-mouse="mouseNodeMenu"></task-common-node>
+          </template>
+          <task-initial-node :node="initialData" backgroundColor="#ff5722" v-on:on-add-path="addPath" v-on:on-select="selectlMethod" v-on:on-drag-start="dragStart" v-on:on-drag-ging="dragGing" v-on:on-drag-end="dragEnd" :updateTem="updateCompleted" v-on:on-mouse="mouseNodeMenu"></task-initial-node>
+        </task-work-area>
+      </div>
     </div>
   </div>
 </template>
@@ -18,7 +28,17 @@ export default {
   name: 'App',
   data () {
     return {
+      work_id: 'work_id',
       startNode: {},
+      nodeModels: [{
+        id: '12',
+        name: 'SQL'}, {
+        id: '13',
+        name: 'WorkData'}, {
+        id: '14',
+        name: 'TableToTV'}, {
+        id: '15',
+        name: '增加系列'}],
       initialData: {
         id: 'node4',
         name: '节点4',
@@ -88,6 +108,21 @@ export default {
           isConnected: true
         }],
         outPorts: []
+      }, {
+        id: 'node6',
+        name: '节点6',
+        positionX: 720,
+        positionY: 220,
+        icon: 'task-icon-6',
+        inPorts: [{
+          id: 'node6_1',
+          isConnected: false
+        }],
+        outPorts: [{
+          id: 'node6_2'
+        }, {
+          id: 'node6_3'
+        }]
       }],
       paths: [{
         dotted: true,
@@ -101,7 +136,7 @@ export default {
         endPort: 'node2_1'
       }, {
         dotted: false,
-        ptype: 'Q',
+        ptype: 'ML',
         startPort: 'node1_4',
         endPort: 'node3_1'
       }, {
@@ -113,6 +148,19 @@ export default {
     }
   },
   methods: {
+    onAddNodeModel (event, node) {
+      console.log('添加节点', event.clientX, event.clientY, node)
+      let newNode = {}
+      newNode = node
+      newNode.id = 'node' + Math.floor(Math.random() * 100)
+      newNode.positionX = node.positionX - 90 // -15 -90 定位到节点的终点
+      newNode.positionY = node.positionY - 15
+      newNode.outPorts = [{
+        id: newNode.id + '_' + Math.floor(Math.random() * 10)
+      }]
+      newNode.inPorts = []
+      this.nodes.push(newNode)
+    },
     mouseFn (event, portData) {
       console.log('mouseFn', 'on-mouse', '鼠标右击路径事件', event, portData)
     },
@@ -182,15 +230,26 @@ export default {
 </script>
 
 <style lang="less">
+  .node-model{
+    background-color: #eee;
+    width: 140px;
+    height: 500px;
+  }
+  .cell-left{
+    float: left;
+  }
+  .cell-fight{
+    float: left;
+  }
   // @import "lib/styles/index.less";
   /*#app {*/
-    /*font-family: 'Avenir', Helvetica, Arial, sans-serif;*/
-    /*-webkit-font-smoothing: antialiased;*/
-    /*-moz-osx-font-smoothing: grayscale;*/
-    /*text-align: center;*/
-    /*color: #2c3e50;*/
-    /*padding: 50px;*/
-    /*background-color: #cccccc;*/
+  /*font-family: 'Avenir', Helvetica, Arial, sans-serif;*/
+  /*-webkit-font-smoothing: antialiased;*/
+  /*-moz-osx-font-smoothing: grayscale;*/
+  /*text-align: center;*/
+  /*color: #2c3e50;*/
+  /*padding: 50px;*/
+  /*background-color: #cccccc;*/
   /*}*/
 </style>
 
@@ -211,4 +270,8 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+>工作经历
+
+工作地点:`云南·昆明`
+工作时间:`2018年5月 - 至今`
 -->

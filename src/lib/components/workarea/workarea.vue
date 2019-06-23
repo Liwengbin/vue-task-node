@@ -1,5 +1,5 @@
 <template>
-  <div :class="classes" :style="areaStyles" @contextmenu.prevent="mouseMenu">
+  <div :class="classes" ref="svgArea" :style="areaStyles" @contextmenu.prevent="mouseMenu" @dragover.prevent @drop.prevent="onAddNodeModel">
         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" :width="width" :height="height" :id="id">
           <g transform="translate(0,0) scale(1,1)">
             <g>
@@ -39,14 +39,24 @@ export default {
     },
     areaStyles () {
       let style = {}
-      style.minWidth = `${this.width}px`
-      style.minHeight = `${this.height}px`
+      style.width = `${this.width}px`
+      style.height = `${this.height}px`
       return style
     }
   },
   methods: {
     mouseMenu: function (event) {
       this.$emit('on-mouse', event, this.id)
+    },
+    onAddNodeModel: function (event) {
+      let node = event.dataTransfer.getData('nodemodel')
+      if (node) {
+        let nodeObj = JSON.parse(node)
+        let ref = this.$refs.svgArea
+        nodeObj.positionX = event.clientX - ref.offsetLeft
+        nodeObj.positionY = event.clientY - ref.offsetTop
+        this.$emit('on-add-nodemodel', event, nodeObj)
+      }
     }
   }
 }
