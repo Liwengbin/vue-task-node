@@ -39,7 +39,6 @@ new Vue({
 起源：mml机器学习平台http://vidanao.com/ml/#/
 > http://vidanao.com/
 
-![1](http://vidanao.com/blog/file/show/201906/img/20190623141923_demo.png)
 ## 四、版本
    
    版本 | 说明	| 更新时间 |是否支持拖拽 | 是否支持节点连线
