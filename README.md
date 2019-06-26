@@ -1,11 +1,10 @@
 # vue-task-node
+>vue-task-node 是一个基于Vue的任务节点图绘制插件（vue-task-node is a Vue based task node mapping plug-in）
 
 >在线Demo <br>
 [https://codesandbox.io/embed/5vvpyj792x?fontsize=14](https://codesandbox.io/embed/5vvpyj792x?fontsize=14)
 
->vue-task-node 是一个基于Vue的任务节点图绘制插件（vue-task-node is a Vue based task node mapping plug-in）
-
->✉：liwenbingmsc@qq.com
+>如有问题欢迎邮箱✉：liwenbingmsc@qq.com
 
 ## 一、安装
 ```js
@@ -63,4 +62,4 @@ new Vue({
    1.2.1 | 新增路径鼠标事件 | 2019年5月23日 | 是 | 是
    1.2.2 | 修改混入方式 | 2019年5月23日 | 是 | 是
    1.3.0 | 工作区外拖拽节点到工作区内 | 2019年6月23日 | 是 | 是
-   1.3.x | 工作区缩放 | 2019年6月日 | 是 | 是x
+   1.3.x | 工作区缩放 | 2019年6月x日 | 是 | 是
