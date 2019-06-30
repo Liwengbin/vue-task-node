@@ -1,23 +1,37 @@
 const state = {
-  pathData: {
+  vi_pathing_data: {
     isShow: false
+  },
+  vi_config: {
+    pathType: 'Q',
+    dotted: false
   }
 }
 const getters = {
-  getPathData () {
-    return state.pathData
+  getViPathingData () {
+    return state.vi_pathing_data
+  },
+  getViConfig () {
+    return state.vi_config
   }
 }
 const mutations = {
-  setPath (state, name) {
-    state.pathData = name
+  setMViPathingData (state, name) {
+    state.vi_pathing_data = name
+  },
+  setMViConfig (state, name) {
+    state.vi_config = name
   }
 }
 const actions = {
-  setPathData ({commit, state}, name) {
-    commit('setPath', name)
+  setViPathingData ({commit, state}, name) {
+    commit('setMViPathingData', name)
+  },
+  setViConfig ({commit, state}, name) {
+    commit('setMViConfig', name)
   }
 }
+
 const store = {
   state,
   getters,

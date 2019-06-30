@@ -18,11 +18,7 @@ export default {
     paths: {
       type: Array
     },
-    areaid: [String, Number],
-    pathtype: {
-      type: [String, Number],
-      default: 'Q'
-    }
+    areaid: [String, Number]
   },
   data () {
     return {
@@ -36,14 +32,14 @@ export default {
   },
   computed: {
     path: function () {
-      let pa = this.$store.getters.getPathData
+      let pa = this.$store.getters.getViPathingData
       let isShow = pa.isShow
       if (pa.Mxy) {
         pa = this.computeXY(pa.Mxy, pa.Txy, true)
       }
       pa.isShow = isShow
-      pa.dotted = false
-      pa.ptype = this.pathtype
+      pa.dotted = this.$store.getters.getViConfig.isDotted
+      pa.ptype = this.$store.getters.getViConfig.lineType
       return pa
     }
   },

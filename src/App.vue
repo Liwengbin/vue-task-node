@@ -8,10 +8,23 @@
               <span class="task-node-model-label">{{nodeM.name}}</span>
             </task-node-model>
           </li>
+          <li>
+            <select class="demo-line" v-model="ini_config.lineType">
+              <option value='Q'>曲线</option>
+              <option value='L'>折线</option>
+              <option value='ML'>直线</option>
+            </select>
+          </li>
+          <li>
+            <select class="demo-line" v-model="ini_config.isDotted">
+              <option :value=true>虚线</option>
+              <option :value=false>实线</option>
+            </select>
+          </li>
         </ul>
       </div>
       <div class="cell-right">
-        <task-work-area width=1000 height=500 :id="work_id" v-on:on-add-nodemodel="onAddNodeModel" v-on:on-mouse="mouseMenu" ref="area">
+        <task-work-area width=1000 height=500 :id="work_id" :ini="ini_config" v-on:on-add-nodemodel="onAddNodeModel" v-on:on-mouse="mouseMenu" ref="area">
           <task-curve-path :areaid="work_id" :paths="paths" ref="curve" v-on:on-mouse="mouseFn" v-on:on-mouse-over="mouseOverFn" v-on:on-mouse-out="mouseOutFn"></task-curve-path>
           <template v-for="node in nodes">
             <task-common-node :key="node.id" :node="node" v-on:on-add-path="addPath" v-on:on-select="selectlMethod" v-on:on-drag-start="dragStart" v-on:on-drag-ging="dragGing" v-on:on-drag-end="dragEnd" :updateTem="updateCompleted" v-on:on-mouse="mouseNodeMenu"></task-common-node>
@@ -29,6 +42,10 @@ export default {
   data () {
     return {
       work_id: 'work_id',
+      ini_config: {
+        lineType: 'Q',
+        isDotted: false
+      },
       startNode: {},
       nodeModels: [{
         id: '12',
@@ -204,8 +221,8 @@ export default {
       })
       setTimeout(function () {
         me.paths.push({
-          dotted: false,
-          ptype: 'Q',
+          dotted: me.ini_config.isDotted,
+          ptype: me.ini_config.lineType,
           startPort: startData,
           endPort: endData
         })
@@ -240,6 +257,11 @@ export default {
   }
   .cell-fight{
     float: left;
+  }
+  .demo-line{
+    width: 140px;
+    height: 26px;
+    border: none;
   }
   // @import "lib/styles/index.less";
   /*#app {*/

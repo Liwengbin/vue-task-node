@@ -19,6 +19,7 @@ const views = {
   TaskCurvePath: CurvePath,
   TaskNodeModel: NodeModel
 }
+
 const install = function (Vue, opts = {}) {
   Object.keys(views).forEach(key => {
     Vue.component(key, views[key])

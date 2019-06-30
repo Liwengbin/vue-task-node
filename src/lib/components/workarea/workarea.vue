@@ -19,6 +19,16 @@ export default {
     }
   },
   props: {
+    ini: {
+      lineType: {
+        type: [String],
+        default: 'Q'
+      },
+      isDotted: {
+        type: [Boolean],
+        default: false
+      }
+    },
     width: {
       type: [String, Number],
       default: 0
@@ -29,6 +39,14 @@ export default {
     },
     id: {
       type: [String, Number]
+    }
+  },
+  watch: {
+    ini: {
+      handler (newIni, oldIni) {
+        this.$store.dispatch('setViConfig', newIni)
+      },
+      deep: true
     }
   },
   computed: {

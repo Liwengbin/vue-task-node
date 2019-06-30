@@ -54,10 +54,10 @@ export default {
         x: event.clientX,
         y: event.clientY
       }
-      this.$store.dispatch('setPathData', {Mxy: this.Mxy, Txy: Txy, isShow: true})
+      this.$store.dispatch('setViPathingData', {Mxy: this.Mxy, Txy: Txy, isShow: true})
     },
     dragPortEnd: function (event) {
-      this.$store.dispatch('setPathData', {isShow: false})
+      this.$store.dispatch('setViPathingData', {isShow: false})
     }
   }
 }
