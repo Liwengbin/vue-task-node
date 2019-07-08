@@ -69,6 +69,7 @@ export default {
     },
     computeXY (vstart, vend, isBing) {
       let area = document.getElementById(this.areaid)
+      let scaling = this.$store.getters.getViConfig.scaling
       let obj = {}
       if (isBing) {
         obj = {
@@ -84,11 +85,11 @@ export default {
       } else {
         obj = {
           Mxy: {
-            x: vstart.getBoundingClientRect().left - area.getBoundingClientRect().left + 5,
-            y: vstart.getBoundingClientRect().top - area.getBoundingClientRect().top + 5
+            x: vstart.getBoundingClientRect().left - area.getBoundingClientRect().left + (5 * scaling.ZoomX),
+            y: vstart.getBoundingClientRect().top - area.getBoundingClientRect().top + (5 * scaling.ZoomY)
           },
           Txy: {
-            x: vend.getBoundingClientRect().left - area.getBoundingClientRect().left + 4,
+            x: vend.getBoundingClientRect().left - area.getBoundingClientRect().left + (4 * scaling.ZoomX),
             y: vend.getBoundingClientRect().top - area.getBoundingClientRect().top + 0
           }
         }

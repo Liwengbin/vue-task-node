@@ -4,7 +4,8 @@ const state = {
   },
   vi_config: {
     pathType: 'Q',
-    dotted: false
+    dotted: false,
+    scaling: {ZoomX: 1, ZoomY: 1}
   }
 }
 const getters = {

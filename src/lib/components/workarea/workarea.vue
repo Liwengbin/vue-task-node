@@ -1,7 +1,7 @@
 <template>
   <div :class="classes" ref="svgArea" :style="areaStyles" @contextmenu.prevent="mouseMenu" @dragover.prevent @drop.prevent="onAddNodeModel">
         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" :width="width" :height="height" :id="id">
-          <g transform="translate(0,0) scale(1,1)">
+          <g :transform="'translate(0,0) scale('+ini.scaling.ZoomX+','+ini.scaling.ZoomY+')'">
             <g>
               <slot></slot>
             </g>
@@ -27,6 +27,10 @@ export default {
       isDotted: {
         type: [Boolean],
         default: false
+      },
+      scaling: {
+        type: [Object],
+        default: {ZoomX: 1, ZoomY: 1}
       }
     },
     width: {
@@ -68,11 +72,12 @@ export default {
     },
     onAddNodeModel: function (event) {
       let node = event.dataTransfer.getData('nodemodel')
+      let scalin = this.$store.getters.getViConfig.scaling
       if (node) {
         let nodeObj = JSON.parse(node)
         let ref = this.$refs.svgArea
-        nodeObj.positionX = event.clientX - ref.offsetLeft
-        nodeObj.positionY = event.clientY - ref.offsetTop
+        nodeObj.positionX = ((event.clientX - ref.offsetLeft) / scalin.ZoomX).toFixed(1)
+        nodeObj.positionY = ((event.clientY - ref.offsetTop) / scalin.ZoomY).toFixed(1)
         this.$emit('on-add-nodemodel', event, nodeObj)
       }
     }

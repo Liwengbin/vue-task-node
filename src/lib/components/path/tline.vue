@@ -1,6 +1,6 @@
 <template>
   <g :class="classes">
-    <path :class="conWrapCls" ref="wrap" :d="drawCurvePath(portData.Mxy, portData.Txy)">
+    <path :class="conWrapCls" ref="wrap" :d="lpath">
     </path>
     <path :class="conCls" ref="con" :d="lpath" @contextmenu.prevent="mouseFn">
     </path>
@@ -13,7 +13,8 @@ export default {
   name: 'TLine',
   data () {
     return {
-      lpath: 'M0 0 Q 0 0, 0 0 T 0 0'
+      lpath: 'M0 0 Q 0 0, 0 0 T 0 0',
+      isDraw: false
     }
   },
   props: {
@@ -66,7 +67,17 @@ export default {
       ]
     }
   },
+  beforeUpdate: function () {
+    if (!this.isDraw) {
+      console.log('b', this.portData.Mxy)
+      this.drawCurvePath()
+    }
+    this.isDraw = false
+  },
   mounted: function () {
+    console.log('m', this.portData.Mxy)
+    this.drawCurvePath()
+    this.isDraw = true
     let me = this
     // let nameSpace = 'http://www.w3.org/2000/svg'
     let _this = this.$refs.con
@@ -82,9 +93,9 @@ export default {
     })
   },
   methods: {
-    drawCurvePath (Mxy, Txy) {
-      if (Mxy && Txy) {
-        this.lpath = Line.drawCurvePath(Mxy, Txy, this.portData.ptype)
+    drawCurvePath () {
+      if (this.portData.Mxy && this.portData.Txy) {
+        this.lpath = Line.drawCurvePath(this.portData.Mxy, this.portData.Txy, this.portData.ptype, this.$store.getters.getViConfig.scaling)
       }
       return this.lpath
     },

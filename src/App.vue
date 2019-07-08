@@ -21,6 +21,10 @@
               <option :value=false>实线</option>
             </select>
           </li>
+          <li>
+            <button class="demo-btn" @click="zoomIn">放大</button>
+            <button class="demo-btn" @click="zoomOut">缩小</button>
+          </li>
         </ul>
       </div>
       <div class="cell-right">
@@ -41,10 +45,15 @@ export default {
   name: 'App',
   data () {
     return {
+      dtl: 10,
       work_id: 'work_id',
       ini_config: {
         lineType: 'Q',
-        isDotted: false
+        isDotted: false,
+        scaling: {
+          ZoomX: 1,
+          ZoomY: 1
+        }
       },
       startNode: {},
       nodeModels: [{
@@ -165,11 +174,19 @@ export default {
     }
   },
   methods: {
+    zoomIn (event) {
+      this.ini_config.scaling.ZoomX = this.ini_config.scaling.ZoomX + 0.1
+      this.ini_config.scaling.ZoomY = this.ini_config.scaling.ZoomY + 0.1
+    },
+    zoomOut (event) {
+      this.ini_config.scaling.ZoomX = this.ini_config.scaling.ZoomX - 0.1
+      this.ini_config.scaling.ZoomY = this.ini_config.scaling.ZoomY - 0.1
+    },
     onAddNodeModel (event, node) {
       console.log('添加节点', event.clientX, event.clientY, node)
       let newNode = {}
       newNode = node
-      newNode.id = 'node' + Math.floor(Math.random() * 100)
+      newNode.id = 'node' + (this.dtl++)
       newNode.positionX = node.positionX - 90 // -15 -90 定位到节点的终点
       newNode.positionY = node.positionY - 15
       newNode.outPorts = [{
@@ -262,6 +279,14 @@ export default {
     width: 140px;
     height: 26px;
     border: none;
+  }
+  .demo-btn{
+    width: 48%;
+    background-color: #fff;
+    border: 1px solid #eee;
+    font-size: 14px;
+    line-height: 26px;
+    cursor: pointer;
   }
   // @import "lib/styles/index.less";
   /*#app {*/
