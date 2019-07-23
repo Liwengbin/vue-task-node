@@ -1,0 +1,21 @@
+@modeltree-prefix-cls: ~"model-tree";
+
+.@{modeltree-prefix-cls} {
+  padding-left: 15px;
+  &-node {
+    cursor: -webkit-grab;
+    cursor: grab;
+    padding: 3px 10px;
+  }
+
+  & li{
+    list-style: none;
+  }
+  &-dir {
+    cursor: pointer;
+    padding: 5px 0;
+    &:hover{
+      background-color: #f5f7fa;
+    }
+  }
+}

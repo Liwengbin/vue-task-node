@@ -1,6 +1,6 @@
 <template>
   <div :class="classes" ref="svgArea" :style="areaStyles" @contextmenu.prevent="mouseMenu" @dragover.prevent @drop.prevent="onAddNodeModel">
-        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" :width="width" :height="height" :id="id">
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" :width="svgWidth" :height="svgHeight" :id="id">
           <g :transform="'translate(0,0) scale('+ini.scaling.ZoomX+','+ini.scaling.ZoomY+')'">
             <g>
               <slot></slot>
@@ -11,11 +11,15 @@
 </template>
 
 <script>
+import mixinsTool from '../../mixins/tool'
 const prefixCls = 'task-work-area'
 export default {
   name: 'WorkArea',
+  mixins: [ mixinsTool ],
   data () {
     return {
+      svgWidth: 1000,
+      svgHeight: 500
     }
   },
   props: {
@@ -66,7 +70,26 @@ export default {
       return style
     }
   },
+  mounted: function () {
+    let me = this
+    this.setHW(me)
+    window.onresize = function () {
+      this.setHW(me)
+    }
+  },
   methods: {
+    setHW: function (me) {
+      if (me.getBrowserHW().width < this.width) {
+        me.svgWidth = this.width
+      } else {
+        me.svgWidth = me.getBrowserHW().width
+      }
+      if (me.getBrowserHW().height < this.height) {
+        me.svgHeight = this.height
+      } else {
+        me.svgHeight = me.getBrowserHW().height
+      }
+    },
     mouseMenu: function (event) {
       this.$emit('on-mouse', event, this.id)
     },
@@ -76,8 +99,8 @@ export default {
       if (node) {
         let nodeObj = JSON.parse(node)
         let ref = this.$refs.svgArea
-        nodeObj.positionX = ((event.clientX - ref.offsetLeft) / scalin.ZoomX).toFixed(1)
-        nodeObj.positionY = ((event.clientY - ref.offsetTop) / scalin.ZoomY).toFixed(1)
+        nodeObj.positionX = ((event.clientX - this.getContainersLeft(ref)) / scalin.ZoomX).toFixed(1)
+        nodeObj.positionY = ((event.clientY - this.getContainersTop(ref)) / scalin.ZoomY).toFixed(1)
         this.$emit('on-add-nodemodel', event, nodeObj)
       }
     }

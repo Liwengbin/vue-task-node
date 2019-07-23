@@ -1,5 +1,5 @@
 <template>
-  <div :style="nodeStyles" :class="classes" draggable="true" @dragstart='dragStart($event)'>
+  <div :class="classes" draggable="true" @dragstart='dragStart($event)'>
     <slot></slot>
   </div>
 </template>
@@ -14,14 +14,6 @@ export default {
         type: [String, Number],
         default: '节点'
       }
-    },
-    width: {
-      type: [String, Number],
-      default: 140
-    },
-    height: {
-      type: [String, Number],
-      default: 26
     }
   },
   data () {
@@ -34,12 +26,6 @@ export default {
       return [
         `${prefixCls}`
       ]
-    },
-    nodeStyles () {
-      let style = {}
-      style.width = `${this.width}px`
-      style.height = `${this.height}px`
-      return style
     }
   },
   methods: {

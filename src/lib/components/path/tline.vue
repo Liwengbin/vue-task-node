@@ -69,13 +69,11 @@ export default {
   },
   beforeUpdate: function () {
     if (!this.isDraw) {
-      console.log('b', this.portData.Mxy)
       this.drawCurvePath()
     }
     this.isDraw = false
   },
   mounted: function () {
-    console.log('m', this.portData.Mxy)
     this.drawCurvePath()
     this.isDraw = true
     let me = this

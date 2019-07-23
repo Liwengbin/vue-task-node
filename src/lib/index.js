@@ -6,6 +6,7 @@ import Node from '../lib/components/node'
 import Common from '../lib/components/node/common'
 import Initial from '../lib/components/node/initial'
 import NodeModel from '../lib/components/nodemodel'
+import ModelTree from '../lib/components/depend'
 import store from '../lib/store'
 import nodemix from '../lib/mixins/node'
 const views = {
@@ -17,7 +18,8 @@ const views = {
   TaskNode: Node,
   TaskPath: Path,
   TaskCurvePath: CurvePath,
-  TaskNodeModel: NodeModel
+  TaskNodeModel: NodeModel,
+  TaskModelTree: ModelTree
 }
 
 const install = function (Vue, opts = {}) {

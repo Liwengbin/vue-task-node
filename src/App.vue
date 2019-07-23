@@ -1,5 +1,9 @@
 <template>
   <div id="app">
+    <div style="position: relative;height: 30px"></div>
+    <div style="width: 140px">
+      <task-model-tree style="padding-left: 0px;" :nodes="modelnodes"></task-model-tree>
+    </div>
     <div class="hello" style="text-align: center">
       <div class="node-model cell-left">
         <ul>
@@ -28,7 +32,7 @@
         </ul>
       </div>
       <div class="cell-right">
-        <task-work-area width=1000 height=500 :id="work_id" :ini="ini_config" v-on:on-add-nodemodel="onAddNodeModel" v-on:on-mouse="mouseMenu" ref="area">
+        <task-work-area width=1000 height=600 :id="work_id" :ini="ini_config" v-on:on-add-nodemodel="onAddNodeModel" v-on:on-mouse="mouseMenu" ref="area">
           <task-curve-path :areaid="work_id" :paths="paths" ref="curve" v-on:on-mouse="mouseFn" v-on:on-mouse-over="mouseOverFn" v-on:on-mouse-out="mouseOutFn"></task-curve-path>
           <template v-for="node in nodes">
             <task-common-node :key="node.id" :node="node" v-on:on-add-path="addPath" v-on:on-select="selectlMethod" v-on:on-drag-start="dragStart" v-on:on-drag-ging="dragGing" v-on:on-drag-end="dragEnd" :updateTem="updateCompleted" v-on:on-mouse="mouseNodeMenu"></task-common-node>
@@ -45,6 +49,26 @@ export default {
   name: 'App',
   data () {
     return {
+      modelnodes: [{
+        id: 1,
+        name: '数据',
+        children: [{
+          id: 2,
+          name: 'node1',
+          icon: 'task-icon-41',
+          children: []
+        }, {
+          id: 3,
+          name: 'node2',
+          icon: 'task-icon-41',
+          children: []
+        }]
+      }, {
+        id: 3,
+        name: 'node3',
+        icon: 'task-icon-43',
+        children: []
+      }],
       dtl: 10,
       work_id: 'work_id',
       ini_config: {
@@ -213,17 +237,20 @@ export default {
       this.startNode = {id: node.id, positionX: event.clientX, positionY: event.clientY}
     },
     dragEnd: function (event, node) {
-      let me = this
       console.log('节点移动结束', event.clientX, event.clientY, node)
+      let nodeXY = {}
+      nodeXY.x = event.clientX
+      nodeXY.y = event.clientY
+      let me = this
       this.nodes.forEach(function (item) {
         if (item.id === node.id) {
-          item.positionX = node.positionX + (event.clientX - me.startNode.positionX)
-          item.positionY = node.positionY + (event.clientY - me.startNode.positionY)
+          item.positionX = node.positionX + (nodeXY.x - me.startNode.positionX)
+          item.positionY = node.positionY + (nodeXY.y - me.startNode.positionY)
         }
       })
       if (node.id === this.initialData.id) {
-        this.initialData.positionX = node.positionX + (event.clientX - me.startNode.positionX)
-        this.initialData.positionY = node.positionY + (event.clientY - me.startNode.positionY)
+        this.initialData.positionX = node.positionX + (nodeXY.x - me.startNode.positionX)
+        this.initialData.positionY = node.positionY + (nodeXY.y - me.startNode.positionY)
       }
     },
     addPath: function (event, startData, endData) {
