@@ -65,27 +65,37 @@ export default {
     },
     areaStyles () {
       let style = {}
-      style.width = `${this.width}px`
-      style.height = `${this.height}px`
+      if (this.isCssInUnit(this.width) >= 0) {
+        style.width = this.width
+      } else {
+        style.width = `${this.width}px`
+      }
+      if (this.isCssInUnit(this.height) >= 0) {
+        style.height = this.height
+      } else {
+        style.height = `${this.height}px`
+      }
       return style
     }
   },
   mounted: function () {
     let me = this
-    this.setHW(me)
+    this.setSvgHW(me)
     window.onresize = function () {
-      this.setHW(me)
+      me.setSvgHW(me)
     }
   },
   methods: {
-    setHW: function (me) {
-      if (me.getBrowserHW().width < this.width) {
-        me.svgWidth = this.width
+    setSvgHW: function (me) {
+      let width = this.transferCss(this.width)
+      let height = this.transferCss(this.height)
+      if (me.getBrowserHW().width < width) {
+        me.svgWidth = width
       } else {
         me.svgWidth = me.getBrowserHW().width
       }
-      if (me.getBrowserHW().height < this.height) {
-        me.svgHeight = this.height
+      if (me.getBrowserHW().height < height) {
+        me.svgHeight = height
       } else {
         me.svgHeight = me.getBrowserHW().height
       }
