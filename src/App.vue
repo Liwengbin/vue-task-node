@@ -239,8 +239,13 @@ export default {
     dragEnd: function (event, node) {
       console.log('节点移动结束', event.clientX, event.clientY, node)
       let nodeXY = {}
-      nodeXY.x = event.clientX
-      nodeXY.y = event.clientY
+      if (window.___NODRAGEVENT) {
+        nodeXY.x = window.___PAGEX
+        nodeXY.y = window.___PAGEY
+      } else {
+        nodeXY.x = event.clientX
+        nodeXY.y = event.clientY
+      }
       let me = this
       this.nodes.forEach(function (item) {
         if (item.id === node.id) {

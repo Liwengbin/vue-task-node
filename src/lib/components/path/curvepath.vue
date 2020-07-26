@@ -10,7 +10,7 @@
 </template>
 <script>
 import TLine from './tline.vue'
-
+import {zoomRatio} from '../../utils/tools'
 export default {
   components: {TLine},
   name: 'CurvePath',
@@ -70,6 +70,8 @@ export default {
     computeXY (vstart, vend, isBing) {
       let area = document.getElementById(this.areaid)
       let scaling = this.$store.getters.getViConfig.scaling
+      let zoom = zoomRatio() / 100
+      console.log(zoom)
       let obj = {}
       if (isBing) {
         obj = {
@@ -83,14 +85,16 @@ export default {
           }
         }
       } else {
+        let vstartRect = vstart.getBoundingClientRect()
+        let vendRect = vend.getBoundingClientRect()
         obj = {
           Mxy: {
-            x: vstart.getBoundingClientRect().left - area.getBoundingClientRect().left + (5 * scaling.ZoomX),
-            y: vstart.getBoundingClientRect().top - area.getBoundingClientRect().top + (5 * scaling.ZoomY)
+            x: vstartRect.left / zoom - area.getBoundingClientRect().left + (5 * scaling.ZoomX),
+            y: vstartRect.top / zoom - area.getBoundingClientRect().top + (5 * scaling.ZoomY)
           },
           Txy: {
-            x: vend.getBoundingClientRect().left - area.getBoundingClientRect().left + (4 * scaling.ZoomX),
-            y: vend.getBoundingClientRect().top - area.getBoundingClientRect().top + 0
+            x: vendRect.left / zoom - area.getBoundingClientRect().left + (4 * scaling.ZoomX),
+            y: vendRect.top / zoom - area.getBoundingClientRect().top + (4 * scaling.ZoomX)
           }
         }
       }

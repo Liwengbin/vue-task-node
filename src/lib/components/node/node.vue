@@ -1,11 +1,13 @@
 <template>
-  <g :transform="'translate('+getCheckX(node.positionX)+','+getCheckY(node.positionY)+')'" :class="classes">
+  <g :class="classes">
     <g transform="scale(1,1)" class="pane-scalable">
       <foreignObject :width="width" :height="height">
         <body xmlns="http://www.w3.org/1999/xhtml">
-            <div @click=selectNodeMethod($event,node,$refs.node) ref="node" draggable="true" @drag='dragGing($event)' @dragstart='dragStart($event)' @dragend="dragEnd($event,node)" @contextmenu.prevent="mouseMenu">
-              <slot></slot>
-            </div>
+        <div @click=selectNodeMethod($event,node,$refs.node) ref="node" draggable="true" @drag='dragGing($event)'
+             @dragstart='dragStart($event)' @dragend="dragEnd($event,node)" class="task-node-content" :style="gStyle"
+             @contextmenu.prevent="mouseMenu">
+          <slot></slot>
+        </div>
         </body>
       </foreignObject>
     </g>
@@ -13,10 +15,11 @@
 </template>
 <script>
 import mixinsTool from '../../mixins/tool'
+
 const prefixCls = 'task-node'
 export default {
   name: 'Node',
-  mixins: [ mixinsTool ],
+  mixins: [mixinsTool],
   data () {
     return {
       store: null
@@ -48,6 +51,11 @@ export default {
       return [
         `${prefixCls}`
       ]
+    },
+    gStyle () {
+      return {
+        transform: `translate3d(${this.getCheckX(this.node.positionX)}px,${this.getCheckY(this.node.positionY)}px,0)`
+      }
     }
   },
   methods: {

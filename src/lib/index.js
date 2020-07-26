@@ -9,6 +9,7 @@ import NodeModel from '../lib/components/nodemodel'
 import ModelTree from '../lib/components/depend'
 import store from '../lib/store'
 import nodemix from '../lib/mixins/node'
+import './utils/firefoxCompatible.js'
 const views = {
   TaskWorkArea: WorkArea,
   TaskInPort: InPort,
