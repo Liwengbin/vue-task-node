@@ -1,10 +1,9 @@
 <template>
-  <div :class="[isConnected ? isCls:classes]" :id="pid" @dragover.prevent=dragPortOver($event) @drop.prevent='inDropPort($event)' @dragenter="dragEnter" @dragleave="dragLeave">
+  <div :class="[isConnected ? isCls:classes]" :id="pid" @mouseup="inDropPort($event)" @dragover.prevent=dragPortOver($event) @drop.prevent='inDropPort($event)' @dragenter="dragEnter" @dragleave="dragLeave">
       <span :class="magnetCls"></span>
   </div>
 </template>
 <script>
-
 const prefixCls = 'task-port'
 export default {
   name: 'InPort',
@@ -50,7 +49,12 @@ export default {
         let _this = event.target.parentNode
         _this.className = this.className
       }
-      let startData = event.dataTransfer.getData('portStart')
+      let startData
+      if (window.___NODRAGEVENT) {
+        startData = window.portStart
+      } else {
+        startData = event.dataTransfer.getData('portStart')
+      }
       if (startData) {
         this.$emit('on-add-path', event, startData, this.pid)
       }

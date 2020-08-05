@@ -4,6 +4,7 @@
   </div>
 </template>
 <script>
+import $ from 'jquery'
 const prefixCls = 'task-port'
 export default {
   name: 'OutPort',
@@ -48,6 +49,10 @@ export default {
         event.dataTransfer.setDragImage(img, 8, 3)
       }
       event.dataTransfer.setData('portStart', this.pid)
+      if (window.___NODRAGEVENT) {
+        window.portStart = this.pid
+        $(document).on('mousemove', this.dragPortGing).on('mouseup', this.dragPortEnd)
+      }
     },
     dragPortGing: function (event) {
       let Txy = {
@@ -58,6 +63,10 @@ export default {
     },
     dragPortEnd: function (event) {
       this.$store.dispatch('setViPathingData', {isShow: false})
+      if (window.___NODRAGEVENT) {
+        window.portStart = ''
+        $(document).unbind('mousemove', this.dragPortGing).unbind('mouseup', this.dragPortEnd)
+      }
     }
   }
 }
